@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Shop Homepage - Start Bootstrap Template</title>
+  <title>Shop Homepage - JavaScript Project</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Desafío 4 y 5</a>
+      <a class="navbar-brand" href="#">Desafío 9</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -68,6 +68,17 @@
         <h1 class="my-4">Coder's Shop</h1>
         <div class="list-group" id="categorias">
           
+        </div>
+
+        <div>
+          <form action="#">
+            <input type="text" placeholder="Nombre" id="input" class="form-control m-2 p-2">
+            <button class="btn btn-primary m-2 p-1 shadow" id="usuario">Ingresar Usuario</button>
+          </form>
+          <div id="nombre">
+
+          </div>
+          <button class="btn btn-secondary m-2 p-1 shadow" id="color">Cambiar color de fondo</button>
         </div>
 
       </div>
@@ -124,9 +135,14 @@
             <p class="text-right">Financiamiento: <span id="cuotas" style="font-size: medium; color: blue; font-weight: bold;"></span></p>
             <div>
               <button id="boton-vaciar" class="btn btn-danger" onClick="vaciarCarrito()" style="font-weight: bold; margin-bottom: 10px;">Vaciar</button>
-              <button id="boton-financiar" class="btn btn-warning" onClick="cuotas(acumuladorTotal)" style="font-weight: bold;margin-bottom: 10px;">Comprar en Cuotas</button>
+              <div >
+                <input type="number" placeholder="Nro de cuotas" id="cuotasIngresadas" class="form-control m-2 p-2">
+                <button id="boton-financiar" class="btn btn-warning" onClick="cuotas(acumuladorTotal)" style="font-weight: bold;margin-bottom: 10px;">Comprar en Cuotas</button>
+                
+              </div>
+              <button id="boton-ordenar" class="btn btn-warning"  style="font-weight: bold;margin-bottom: 10px;">Ordenar Carrito de Menor a Mayor Precio</button>
             </div>
-            
+          
           </div>
         </div>
 
@@ -146,7 +162,7 @@
     </div>
     <!-- /.container -->
   </footer>
-
+  <script src="js/stock.js"></script>
   <script src="js/main.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
