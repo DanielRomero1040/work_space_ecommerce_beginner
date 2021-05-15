@@ -1,4 +1,4 @@
-let stockProductos = [
+export default let stockProductos = [
     {id: 1, nombre: "Tablet 1", tipo: "tablet", desc: "Tablet TCL LT7M 7 16GB negra con 1GB de memoria RAM", precio: 1200, talle: "L", img: 'imagenes/buzos.jpg'},
     {id: 2, nombre: "Tablet 2", tipo: "tablet", desc: "Celular Motorola G9 Power 4gb 128gb 6.8 Garantia Oficial 6c", precio: 1100, talle: "L", img: 'imagenes/buzos.jpg'},
     {id: 3, nombre: "Tablet 3", tipo: "tablet", desc: "Alcatel 5X 128 GB black 4 GB RAM", precio: 1200, talle: "M", img: 'imagenes/buzos.jpg'},
@@ -23,4 +23,4 @@ let stockProductos = [
     {id: 22, nombre: "Pantalon 4", tipo: "pantalon", desc: "pantalon", precio: 5600, talle: "M", img: 'imagenes/lentes.jpg'},
     {id: 23, nombre: "Pantalon 5", tipo: "pantalon", desc: "pantalon", precio: 1700, talle: "S", img: 'imagenes/lentes.jpg'},
     {id: 24, nombre: "Pantalon 6", tipo: "pantalon", desc: "pantalon", precio: 800, talle: "S", img: 'imagenes/lentes.jpg'},
-]
+];

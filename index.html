@@ -9,7 +9,8 @@
   <meta name="author" content="">
 
   <title>Shop Homepage - JavaScript Project</title>
-
+  <script src="https://kit.fontawesome.com/df59baf6b8.js" crossorigin="anonymous"></script>    
+    
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -23,7 +24,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Desafío 9</a>
+      <a class="navbar-brand" href="#">Segunda Entrega Proyecto Final</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -81,6 +82,25 @@
           <button class="btn btn-secondary m-2 p-1 shadow" id="color">Cambiar color de fondo</button>
         </div>
 
+        
+        <!-- Buscador -->
+        <div>
+          <p>Filtrar por precio</p>
+          <select id="precios">
+            <option value="0">Todos</option>
+            <option value="1">0 - 5.000 $</option>
+            <option value="2">mayor a 5.000 $</option>
+          </select>
+        </div>
+        
+        <div class="mt-5">
+          <p>Desafío de jQuery</p>
+          <div id="contendorParaDesafio">
+            <ul id="registroDeUsuarios" class="list-group">
+            </ul>
+          </div>
+          <button class="btn btn-secondary m-2 p-1 shadow" id="otroUsuario">Registrar otro usuario</button>
+        </div>
       </div>
       <!-- /.col-lg-3 -->
 
@@ -154,6 +174,20 @@
 
   </div>
   <!-- /.container -->
+  <div class="modal-container" id="modal">
+    <div class="modal-historial">
+        <h3>Registro de Usuarios</h3>
+        <button id="cerrar"><i class="fas fa-times-circle"></i></button>
+        <div id="historial-contenedor">
+          <input type="text" placeholder="Nombre" id="desafioNombre" class="form-control m-2 p-2">
+          <input type="text" placeholder="apellido" id="desafioApellido" class="form-control m-2 p-2">
+          <input type="number" placeholder="telefono" id="desafioTelefono" class="form-control m-2 p-2">
+          <p id="fechaDeConexion"></p>
+          <button class="btn btn-secondary m-2 p-1 shadow" id="registro">Pruebas</button>
+          
+        </div>            
+    </div>
+</div>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
@@ -162,8 +196,7 @@
     </div>
     <!-- /.container -->
   </footer>
-  <script src="js/stock.js"></script>
-  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js" defer></script>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
