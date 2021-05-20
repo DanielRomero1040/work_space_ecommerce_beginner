@@ -1,9 +1,9 @@
 //import ManagerDom from './ManagerDom.js';
+//import agregarAlCarrito from './functions.js';
 
-let contenedorCategorias = document.getElementById("categorias"),
-    contenedorDeProductos = document.getElementById('productos'), 
-    acumuladorBanners = ``,
-    acumuladorCarruselItem = ``,
+let contenedorDeProductos = document.getElementById('productos'), 
+    
+    
     acumuladorIndicadorCarrito = 0,
     acumuladorItemsCarrito = ``,
     acumuladorTotal = 0,
@@ -11,30 +11,100 @@ let contenedorCategorias = document.getElementById("categorias"),
     cantidadDeCuotas,
     cuotaMensual,
     carritoEnLocalStorage = [],
-    carrito = [],
-    banner = ['banner1','banner2','banner3'],
-    categorias = ['Mujer','Hombre','Niños'];
+    carrito = [];
+
+
+  class ManagerDom{
+      static crearCard(objeto){
+          objeto.forEach( element => {
+              const div = document.createElement('div');
+              div.classList.add('col-lg-4','col-md-6','mb-4')
+              div.innerHTML = `
+                <div class="card h-100">
+                  <a href="#"><img height="250" width="400" class="card-img-top" src=${element.thumbnail} alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                    <a href="#">${element.title}</a>
+                    </h4>
+                    <h5> $${element.price}</h5>
+                  </div>
+                  <div class="card-footer d-flex flex-column">
+                    <div clas="d-flex flex-row justify-content-center align-items-center">
+                      <small class="text-muted col-1">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                      <button class=" col-6 btn btn-primary ml-1 mb-1" onClick='agregarAlCarrito(${JSON.stringify(element)})'>Add Cart</button>
+                    </div>
+                         
+                  </div>
+                </div>
+            `
+            document.getElementById('productos').appendChild(div);
+          });
+      }
+  
+      static crearCategorias(categorias){
+        let select = document.getElementById('categorias');
+        let options = ``;
+          categorias.forEach( (element) => {options += `<option value="${element.id}">${element.name}</option>`
+          });
+        select.innerHTML = options;
+      }
+  
+      static crearBanner(){
+          let banner = ['banner1','banner2','banner3'];
+          let acumuladorBanners = ``;
+          let acumuladorCarruselItem = ``;
+  
+          for (let i = 0; i < banner.length; i++) {
+            if (i === 0 ){
+              acumuladorBanners += `<li data-target="#carouselExampleIndicators" data-slide-to="${i}" class="active"></li>`;    
+            }else{
+              acumuladorBanners += `<li data-target="#carouselExampleIndicators" data-slide-to="${i}"></li>`;
+              };  
+          };
+          
+          for (let i = 0; i < banner.length; i++) {
+            if (i === 0 ){
+              acumuladorCarruselItem += `<div class="carousel-item active">
+              <img class="d-block img-fluid" height="250" src="imagenes/${banner[i]}.jpg" alt="${i} slide">
+            </div>`;
+            }else{
+              acumuladorCarruselItem += `<div class="carousel-item">
+              <img class="d-block img-fluid" height="250" src="imagenes/${banner[i]}.jpg" alt="${i} slide">
+            </div>`;
+            }  
+          };
+  
+          document.getElementById("indicadores").innerHTML = acumuladorBanners;
+          document.getElementById("carrusel").innerHTML = acumuladorCarruselItem;
+        }
+  
+        static filtrarCategoria(){
+          console.log('probando')
+        }
+        static seleccionCategoria(id){
+            let URLProductoFiltrado = 'https://api.mercadolibre.com/sites/MLA/search?category=' + id;
+            return URLProductoFiltrado;
+        }
+  }
 
 // Desafio de jQuery - 12 y 13 - registro de usuarios
 
 let desafioNombre = $('#desafioNombre');
 let desafioApellido = $('#desafioApellido');
 let desafioTelefono = $('#desafioTelefono');
-let desafioFecha = $('#fechaDeConexion');
 let botonRegistro = $('#registro');
-let registroDeUsuarios = $('#registroDeUsuarios');
 let botonCerrar = $('#cerrar');
 
 
-$(document).ready(function (){
-  $('#modal').addClass('modal-active');
-  $('#historial-contenedor').append(`<p id="animacion" class=""></p>`);
-  setInterval(function(){ $('#animacion').animate({left:'450px'}, 1000, function(){
-    $(this).animate({left:'0px'}, 1000, function(){});
-  }); }, 300);
+// $(document).ready(function (){
+//   $('#modal').addClass('modal-active');
+//   $('#historial-contenedor').append(`<p id="animacion" class=""></p>`);
+//   setInterval(function(){ $('#animacion').animate({left:'450px'}, 1000, function(){
+//     $(this).animate({left:'0px'}, 1000, function(){});
+//   }); }, 300);
   
   
-});
+// });
 
 $('#otroUsuario').on('click', function (){
   $('#modal').addClass('modal-active');
@@ -76,74 +146,47 @@ botonRegistro.on('click', function(){
 
     }
 });
+// fin de desafio jquery
 
 
 
+//   Incorporacion al DOM
+const URLCATEGORIAS = 'https://api.mercadolibre.com/sites/MLA/categories';
+const URLPRODUCTOS = 'https://api.mercadolibre.com/sites/MLA/search?category=';
 
-//    creacion de las cards
+document.addEventListener('DOMContentLoaded', function(){
+  fetch(URLCATEGORIAS)
+    .then(respuesta => {
+      console.log(respuesta);
+      return respuesta.json();
+    })
+    .then( categorias => {
+      let urlProducto = URLPRODUCTOS + 'MLA1051'; // seccion de celulares..
+      fetchProductos(urlProducto);
+      ManagerDom.crearCategorias(categorias)      
+      
+    })
+    .catch(e => console.log(e));
+})
 
-//ManagerDom.crearCard(stockProductos);
-
-stockProductos.forEach( element => {
-  const div = document.createElement('div');
-  div.classList.add('col-lg-4','col-md-6','mb-4')
-  div.innerHTML = `
-    <div class="card h-100">
-      <a href="#"><img height="250" width="400" class="card-img-top" src=${element.img} alt=""></a>
-      <div class="card-body">
-        <h4 class="card-title">
-        <a href="#">${element.nombre}</a>
-        </h4>
-        <h5> $${element.precio}</h5>
-        <p class="card-text">${element.desc}.</p>
-      </div>
-      <div class="card-footer d-flex flex-column">
-        <div clas="d-flex flex-row justify-content-center align-items-center">
-          <small class="text-muted col-1">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-          <button class=" col-6 btn btn-primary ml-1 mb-1" onClick='agregarAlCarrito(${JSON.stringify(element)})'>Add Cart</button>
-        </div>
-             
-      </div>
-    </div>
-`
-contenedorDeProductos.appendChild(div);
-});
+function fetchProductos(url){
+  fetch(url)
+    .then(respuesta => {
+      console.log(respuesta);
+      return respuesta.json();
+    })
+    .then( articulos => ManagerDom.crearCard(articulos.results))
+    .catch(e => console.log(e));
+}
 
 
-//   Creacion de categorias y banners
-categorias.forEach( (element) => {
-  const a = document.createElement('a');
-  a.classList.add('list-group-item');  
-  //a.href.add('#')
-  a.innerHTML = `<a>${element}</a>`;  
-  contenedorCategorias.appendChild(a);
-});
+ManagerDom.crearBanner();
 
-for (let i = 0; i < banner.length; i++) {
-  if (i === 0 ){
-    acumuladorBanners += `<li data-target="#carouselExampleIndicators" data-slide-to="${i}" class="active"></li>`;    
-  }else{
-    acumuladorBanners += `<li data-target="#carouselExampleIndicators" data-slide-to="${i}"></li>`;
-    };  
-};
-
-for (let i = 0; i < banner.length; i++) {
-  if (i === 0 ){
-    acumuladorCarruselItem += `<div class="carousel-item active">
-    <img class="d-block img-fluid" height="250" src="imagenes/${banner[i]}.jpg" alt="${i} slide">
-  </div>`;
-  }else{
-    acumuladorCarruselItem += `<div class="carousel-item">
-    <img class="d-block img-fluid" height="250" src="imagenes/${banner[i]}.jpg" alt="${i} slide">
-  </div>`;
-  }  
-};
 
 
 //  declaracion de funcionalidades
 
-let agregarAlCarrito = (producto) => {
-  
+let agregarAlCarrito = (producto) => {  
   console.log(carrito)
   if (carrito) {
     let itemEnCarrito = carrito.find(el => el.id == producto.id);
@@ -177,12 +220,12 @@ let actualizarCarrito = () => {
     const li = document.createElement('li')
     li.classList.add('list-group-item','text-right', 'mx-2')
     li.innerHTML = `
-    ${element.cantidad} unidades x "${element.nombre}" - ${element.precio} $/unidad  <span>-    Subtotal = ${element.cantidad * element.precio} $ </span>
-    <button class="btn btn-danger mx-5" style="margin-left:1rem" onClick='eliminarItem(${element.id})'>X</button>
+    ${element.cantidad} unidades x "${element.title}" - ${element.price} $/unidad  <span>-    Subtotal = ${element.cantidad * element.price} $ </span>
+    <button class="btn btn-danger mx-5" style="margin-left:1rem" onClick='eliminarItem("${element.id}")'>X</button>
     </li>`;
   document.getElementById("carrito").appendChild(li)
   });
-  acumuladorTotal = carritoEnLocalStorage.reduce( (acumu , el) => acumu += el.precio * el.cantidad, 0);
+  acumuladorTotal = carritoEnLocalStorage.reduce( (acumu , el) => acumu += el.price * el.cantidad, 0);
   document.getElementById("total").innerHTML = acumuladorTotal;  
 };
 
@@ -245,9 +288,9 @@ let cuotas = () => {
 
 let ordenarCarrito = () => {  
   acumuladorItemsCarrito = ``;
-  carritoEnLocalStorage.sort( (a , b) => a.precio - b.precio);  
+  carritoEnLocalStorage.sort( (a , b) => a.price - b.price);  
   carritoEnLocalStorage.forEach(element => { acumuladorItemsCarrito +=`<li class="list-group-item text-right mx-2">
-    ${element.cantidad} unidades x "${element.nombre}" - ${element.precio} $/unidad  <span>-    Subtotal = ${element.cantidad * element.precio} $ </span>
+    ${element.cantidad} unidades x "${element.title}" - ${element.price} $/unidad  <span>-    Subtotal = ${element.cantidad * element.price} $ </span>
     <button class="btn btn-danger mx-5" style="margin-left:1rem"onClick='eliminarItem(${element.id})'>X</button>
     </li>`;      
     });
@@ -309,13 +352,12 @@ function filtrar() {
     div.classList.add('col-lg-4','col-md-6','mb-4')
     div.innerHTML = `
       <div class="card h-100">
-        <a href="#"><img height="250" width="400" class="card-img-top" src=${element.img} alt=""></a>
+        <a href="#"><img height="250" width="400" class="card-img-top" src=${element.thumbnail} alt=""></a>
         <div class="card-body">
           <h4 class="card-title">
-          <a href="#">${element.nombre}</a>
+          <a href="#">${element.title}</a>
           </h4>
-          <h5> $${element.precio}</h5>
-          <p class="card-text">${element.desc}.</p>
+          <h5> $${element.price}</h5>
         </div>
         <div class="card-footer d-flex flex-column">
           <div clas="d-flex flex-row justify-content-center align-items-center">
@@ -334,19 +376,41 @@ selectPrecios.addEventListener('change', ()=>{
   filtrar()
 })
 
-document.getElementById("indicadores").innerHTML = acumuladorBanners;
-document.getElementById("carrusel").innerHTML = acumuladorCarruselItem;
+
 document.getElementById("acumuladorCarrito").innerHTML = acumuladorIndicadorCarrito;
 document.getElementById("carrito").innerHTML = acumuladorItemsCarrito;
 document.getElementById("total").innerHTML = acumuladorTotal;
 document.getElementById("cuotas").innerHTML = acumuladorCuotas;
 
 
-fetch('https://api.mercadolibre.com/sites/MLA/search?category=MLA1055')
-  .then(respuesta => {
-    console.log(respuesta);
-    return respuesta.json();
-  })
-  .then( articulos => console.log(articulos.results))
 
-  
+// async function generarLinkDePago() {
+//   const productsToMP = carrito.map((element) => {
+//     let nuevoElemento = {
+//       title: element.title,
+//       description: "",
+//       picture_url: "",
+//       category_id: element.id,
+//       quantity: Number(element.cantidad),
+//       currency_id: "ARS",
+//       unit_price: Number(element.precio),
+//     };
+//     return nuevoElemento;
+//   });
+//   console.log(productsToMP);
+//   const response = await fetch(
+//     "https://api.mercadopago.com/checkout/preferences",
+//     {
+//       method: "POST",
+//       headers: {
+//         Authorization:
+//           "Bearer ACA VA TU TOKEN",
+//       },
+//       body: JSON.stringify({
+//         items: productsToMP,
+//       }),
+//     }
+//   );
+//   const data = await response.json();
+//   window.open(data.init_point, "_blank");
+// }
