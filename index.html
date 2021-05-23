@@ -1,217 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<head>
+    <title>Imi-Meli</title>
+    <script src="https://kit.fontawesome.com/df59baf6b8.js" crossorigin="anonymous"></script>    
+      
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <link href="css/shop-homepage.css" rel="stylesheet">
 
-  <title>Shop Homepage - JavaScript Project</title>
-  <script src="https://kit.fontawesome.com/df59baf6b8.js" crossorigin="anonymous"></script>    
+  </head>
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex flex-column  ">
+      <div class="container row">
+        <a class="navbar-brand" href="#">Imi-Meli</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <input class="form-control col-lg-6 mr-1" id="busqueda" type="text" placeholder="Busca productos, marcas y mas..." >
+        <input type="button" class="btn btn-primary" value="Buscar" id="buscar" />
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link mt-2" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mt-2" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mt-2" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mt-2" href="#">Contact</a>
+            </li>
+            <li class="nav-item d-flex flex-row align-items-center">
+              <a class="nav-link d-flex align-items-center" id="changuito">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg>
+                <p id="acumuladorCarrito" class="ml-2 d-flex justify-content-center align-items-center" style="background-color:rgb(35, 58, 161); width: 25px; height: 25px; border-radius: 50%; padding: 15px;">
+
+                </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="container col-lg-12">
+        <div class="row navbar-dark bg-dark col-lg-12" >
+              <select id="categorias" class="form-control m-1" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>    
+        </div>
+      </div>  
+    </nav>
     
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="css/shop-homepage.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="col-lg banner ">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators" id="indicadores">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox" id="carrusel">
+          <div class="carousel-item m-0 active">
+            <img class="d-block m-0 img-fluid" src="http://placehold.it/900x350" alt="First slide">
+          </div>
+          <div class="carousel-item m-0">
+            <img class="d-block m-0 img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+          </div>
+          <div class="carousel-item m-0">
+            <img class="d-block m-0 img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <!-- Page Content -->
     <div class="container">
-      <a class="navbar-brand" href="#">Imi-Meli</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <input class="form-control" type="text" placeholder="Busca productos, marcas y mas..." >
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-          <li class="nav-item d-flex flex-row align-items-center">
-            <a class="nav-link d-flex align-items-center" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
-                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-              </svg>
-              <p id="acumuladorCarrito" class="ml-2 d-flex justify-content-center align-items-center" style="background-color:rgb(35, 58, 161); width: 25px; height: 25px; border-radius: 50%; padding: 15px;">
-
-              </p>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-  </nav>
-  <div class="row navbar-dark bg-dark" >
-        <select id="categorias" class="form-control ml-5 mr-5 mt-4 mb-2" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>    
-  </div>
-  <!-- Page Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg">
-
-        <h1 class="my-4">Coder's Shop</h1>
-        
-
-        <div>
-          <form action="#">
-            <input type="text" placeholder="Nombre" id="input" class="form-control m-2 p-2">
-            <button class="btn btn-primary m-2 p-1 shadow" id="usuario">Ingresar Usuario</button>
-          </form>
-          <div id="nombre">
-
-          </div>
-          <button class="btn btn-secondary m-2 p-1 shadow" id="color">Cambiar color de fondo</button>
-        </div>
-
-        
-        <!-- Buscador -->
-        <div>
-          <p>Filtrar por precio</p>
-          <select id="precios">
-            <option value="0">Todos</option>
-            <option value="1">0 - 5.000 $</option>
-            <option value="2">mayor a 5.000 $</option>
-          </select>
-        </div>
-        
-        <div class="mt-5">
-          <p>Desafío de jQuery</p>
-          <div id="contendorParaDesafio">
-            <ul id="registroDeUsuarios" class="list-group">
-            </ul>
-          </div>
-          <button class="btn btn-secondary m-2 p-1 shadow" id="otroUsuario">Registrar otro usuario</button>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-
-      
-      <!-- /.col-lg-3 -->
-
-      <div class="col-lg">
-
-        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-          <ol class="carousel-indicators" id="indicadores">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner" role="listbox" id="carrusel">
-            <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-
-        <div class="row" id="productos">
-
-        
-
-        </div>
-        <!-- /.row -->
-        <div id="resumenDeCompra" class="container">
+      <div class="row">
+        <div class="col-lg mb-2">    
+          <!-- Buscador -->
           <div>
-            <p>Carrito de Compras</p>
-            <!-- Elementos del carrito -->
-            <ul id="carrito" class="list-group">
-              <li class="list-group-item text-right mx-2">
-                cantidad x producto - precio
+            <p>Filtrar por precio</p>
+            <select id="precios">
+              <option value="0">Todos</option>
+              <option value="1">0 - 5.000 $</option>
+              <option value="2">mayor a 5.000 $</option>
+            </select>
+          </div>
+        </div>
+      <div class="row">
+
+        
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg">
+          <div class="row" id="productos">
+
+          
+
+          </div>
+          <!-- /.row -->
+          <div id="resumenDeCompra" class="container">
+            <div>
+              <!-- <p>Carrito de Compras</p> -->
+              <!-- Elementos del carrito -->
+              <!-- <ul id="carrito" class="list-group">
+                <li class="list-group-item text-right mx-2">
+                  cantidad x producto - precio
+                  <button class="btn btn-danger mx-5" style="margin-left:1rem">X</button>
+                </li>
+              </ul> -->
+              <hr>
+              <!-- Precio total -->
+              
+              
+            
+            </div>
+          </div>
+
+        </div>
+        
+        <!-- /.col-lg-9 -->
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- modal registro de usuario -->
+    <!-- <div class="modal-container" id="modal">
+      <div class="modal-historial">
+          <h3>Registro de Usuarios</h3>
+          <button id="cerrar"><i class="fas fa-times-circle"></i></button>
+          <div id="historial-contenedor">
+            <input type="text" placeholder="Nombre" id="desafioNombre" class="form-control m-2 p-2">
+            <input type="text" placeholder="apellido" id="desafioApellido" class="form-control m-2 p-2">
+            <input type="number" placeholder="telefono" id="desafioTelefono" class="form-control m-2 p-2">
+            <p id="fechaDeConexion"></p>
+            <button class="btn btn-secondary m-2 p-1 shadow" id="registro">Pruebas</button>
+            
+          </div>            
+      </div>
+    </div> -->
+
+    <!-- modal carrito -->
+    <div class="modal-container" id="modalCarrito">
+      <div class="modal-carrito">
+          <h3>Carrito de Compras</h3>
+          <button id="cerrarCarrito"><i class="fas fa-times-circle"></i></button>
+          <ul id="carrito" class="list-group">
+            <li class="list-group-item text-right mx-2 d-flex flex-row justify-content-between">
+              <img src="" alt="" height="20px" width="20px">
+              <div>
+                <span>cantidad x producto - precio</span>
                 <button class="btn btn-danger mx-5" style="margin-left:1rem">X</button>
-              </li>
-            </ul>
-            <hr>
-            <!-- Precio total -->
-            <p class="text-right">Total: <span id="total" style="font-size: medium; font-weight: bold;"></span>$</p>
-            <p class="text-right">Financiamiento: <span id="cuotas" style="font-size: medium; color: blue; font-weight: bold;"></span></p>
+              </div>
+            </li>
+          </ul>
+          <div class="d-flex flex-row justify-content-between mt-2">
             <div>
               <button id="boton-vaciar" class="btn btn-danger" onClick="vaciarCarrito()" style="font-weight: bold; margin-bottom: 10px;">Vaciar</button>
-              <div >
-                <input type="number" placeholder="Nro de cuotas" id="cuotasIngresadas" class="form-control m-2 p-2">
-                <button id="boton-financiar" class="btn btn-warning" onClick="cuotas(acumuladorTotal)" style="font-weight: bold;margin-bottom: 10px;">Comprar en Cuotas</button>
-                
-              </div>
-              <button id="boton-ordenar" class="btn btn-warning"  style="font-weight: bold;margin-bottom: 10px;">Ordenar Carrito de Menor a Mayor Precio</button>
+              <button id="boton-ordenar" class="btn btn-warning"  style=" font-weight: bold;margin-bottom: 10px;">Ordenar</button>
+              <button id="boton-pagar" class="btn btn-success"  style="font-weight: bold; margin-bottom: 10px;">Pagar</button>
             </div>
-          
+            <p class="text-right">Total: <span id="total" style="font-size: medium; font-weight: bold;"></span>$</p>
+
           </div>
-        </div>
-
+          <!-- <div class="d-flex flex-column">
+            <div class="d-flex flex-row">
+                  <p class="text-right">Financiamiento: <span id="cuotas" style="font-size: medium; color: blue; font-weight: bold;"></span></p>
+                  <input type="number" placeholder="Nro de cuotas" id="cuotasIngresadas" class="form-control m-2 p-2">
+                  <button id="boton-financiar" class="btn btn-warning" onClick="cuotas(acumuladorTotal)" style="font-weight: bold;margin-bottom: 10px;">Comprar en Cuotas</button>
+                  
+            </div> 
+          </div>             -->
       </div>
-      
-      <!-- /.col-lg-9 -->
-
     </div>
-    <!-- /.row -->
 
-  </div>
-  <!-- /.container -->
-  <div class="modal-container" id="modal">
-    <div class="modal-historial">
-        <h3>Registro de Usuarios</h3>
-        <button id="cerrar"><i class="fas fa-times-circle"></i></button>
-        <div id="historial-contenedor">
-          <input type="text" placeholder="Nombre" id="desafioNombre" class="form-control m-2 p-2">
-          <input type="text" placeholder="apellido" id="desafioApellido" class="form-control m-2 p-2">
-          <input type="number" placeholder="telefono" id="desafioTelefono" class="form-control m-2 p-2">
-          <p id="fechaDeConexion"></p>
-          <button class="btn btn-secondary m-2 p-1 shadow" id="registro">Pruebas</button>
-          
-        </div>            
-    </div>
-</div>
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/functions.js" defer></script>
+    <script src="js/ManagerDom.js" defer></script>
+    <script src="js/desafioJquery.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <!-- Bootstrap core JavaScript -->
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="js/main.js" defer></script>
-  <!-- Bootstrap core JavaScript -->
-
-</body>
-
+  </body>
 </html>

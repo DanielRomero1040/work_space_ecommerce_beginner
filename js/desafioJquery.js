@@ -7,15 +7,15 @@ let botonRegistro = $('#registro');
 let botonCerrar = $('#cerrar');
 
 
-$(document).ready(function (){
-  $('#modal').addClass('modal-active');
-  $('#historial-contenedor').append(`<p id="animacion" class=""></p>`);
-  setInterval(function(){ $('#animacion').animate({left:'450px'}, 1000, function(){
-    $(this).animate({left:'0px'}, 1000, function(){});
-  }); }, 300);
+// $(document).ready(function (){
+//   $('#modal').addClass('modal-active');
+//   $('#historial-contenedor').append(`<p id="animacion" class=""></p>`);
+//   setInterval(function(){ $('#animacion').animate({left:'450px'}, 1000, function(){
+//     $(this).animate({left:'0px'}, 1000, function(){});
+//   }); }, 300);
   
   
-});
+// });
 
 $('#otroUsuario').on('click', function (){
   $('#modal').addClass('modal-active');
