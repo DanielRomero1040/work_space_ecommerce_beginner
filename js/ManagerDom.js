@@ -105,7 +105,6 @@ class ManagerDom{
     } else if (valorFiltroPrecios == 0) {
       arrayFiltrado = productosEnPantalla;
     }
-    
     ManagerDom.crearCard(arrayFiltrado);
     
   }

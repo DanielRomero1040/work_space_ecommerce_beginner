@@ -32,7 +32,7 @@ let actualizarCarrito = () => {
     const li = document.createElement('li')
     li.classList.add('list-group-item','text-right', 'mx-2', 'd-flex', 'flex-row', 'justify-content-between')
     li.innerHTML = `
-    <img src="${element.thumbnail}" alt="" height="50px" width="50px">
+    <img src="${element.thumbnail}" alt="" height="50px" width="50px" class="mr-3">
     <div class="text-right">
       <span>${element.cantidad} unds x "${element.title}" - ${element.price} $/unidad  <span>-    Subtotal = ${element.cantidad * element.price} $ </span></span>
       <button id="eliminarItem" class="btn btn-danger" style="margin-left:0" onClick='eliminarItem("${element.id}")'>X</button>
@@ -58,8 +58,7 @@ let iniciarCarrito = () => {
     //localStorage.removeItem('colorDeFondo');
     carritoEnLocalStorage = [];
     carrito = []; 
-  }
-    
+  }    
 };
 
 let vaciarCarrito = () => {
@@ -68,13 +67,11 @@ let vaciarCarrito = () => {
   acumuladorItemsCarrito = ``;
   acumuladorIndicadorCarrito = 0;
   acumuladorTotal = 0;
-  //acumuladorCuotas = ``;
   carritoEnLocalStorage = [];
   carrito = [];
   document.getElementById("carrito").innerHTML = acumuladorItemsCarrito;
   document.getElementById("acumuladorCarrito").innerHTML = acumuladorIndicadorCarrito;
   document.getElementById("total").innerHTML = acumuladorTotal;
-  //document.getElementById("cuotas").innerHTML = acumuladorCuotas; 
 };
 
 let eliminarItem = (id) => {
@@ -94,19 +91,12 @@ let eliminarItem = (id) => {
   indicadorCarrito()  
 };
 
-// let cuotas = () => {
-//   cantidadDeCuotas = parseInt(document.getElementById('cuotasIngresadas').value);
-//   cuotaMensual = acumuladorTotal / cantidadDeCuotas;
-//   acumuladorCuotas = `Pagarás ${cuotaMensual}$ mensuales, durante ${cantidadDeCuotas} meses, Sin Intereses!! `
-//   document.getElementById("cuotas").innerHTML = acumuladorCuotas;
-// };
-
 let ordenarCarrito = () => {  
   acumuladorItemsCarrito = ``;
   carritoEnLocalStorage.sort( (a , b) => a.price - b.price);  
   carritoEnLocalStorage.forEach(element => { acumuladorItemsCarrito +=`
     <li class="list-group-item text-right mx-2 d-flex flex-row justify-content-between">
-      <img src="${element.thumbnail}" alt="" height="50px" width="50px">
+      <img src="${element.thumbnail}" alt="" height="50px" width="50px" class="mr-3">
       <div class="text-right">
         <span>${element.cantidad} unds x "${element.title}" - ${element.price} $/unidad  <span>-    Subtotal = ${element.cantidad * element.price} $ </span></span>
         <button id="eliminarItem" class="btn btn-danger" style="margin-left:0" onClick='eliminarItem("${element.id}")'>X</button>
@@ -116,18 +106,35 @@ let ordenarCarrito = () => {
   document.getElementById("carrito").innerHTML = acumuladorItemsCarrito;
 };
 
-// let ingresarNombre = () => {
-//   nombre = document.getElementById("input").value
-//   elementoNombre = `<p class="bg-success p-2 m-2 text-white rounded-lg shadow" > Bienvenido/a ${nombre} a tu tienda online! los mejores precios solo para vos! </p>`;
-//   document.getElementById("nombre").innerHTML = elementoNombre;
-// };
+function fetchProductos(url){
+  animacionCarga();
+  fetch(url)
+    .then(respuesta => {
+      console.log(respuesta);
+      return respuesta.json();
+    })
+    .then( articulos => {
+      productosEnPantalla = [];
+      ManagerDom.crearCard(articulos.results)})
+    .catch(e => console.log(e));
+}
+
+let animacionCarga = () => {
+  contenedorDeProductos.innerHTML=``;
+  const div = document.createElement('div');
+          div.classList.add('cont-animacion')
+          div.innerHTML = `
+          <div class="animacionCarga">
+          </div> `
+  contenedorDeProductos.appendChild(div);
+};
 
 // function random(number) {
 //   return Math.floor(Math.random() * (number+1));
 // };
 
 // function bgChange() {
-//   let rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+//   let fondoOscuro = 'rgb(' 39, 39, 43')';
 //   console.log(rndCol)
 //   localStorage.setItem('colorDeFondo', rndCol);
 //   document.body.style.backgroundColor = rndCol;

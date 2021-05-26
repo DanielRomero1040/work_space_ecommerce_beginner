@@ -6,14 +6,14 @@ let contenedorDeProductos = document.getElementById('productos'),
     cantidadDeCuotas,
     cuotaMensual,
     carritoEnLocalStorage = [],
-    carrito = [];
-let cargarPagina = document.body;
-let botonOrdenar = document.getElementById('boton-ordenar');
-let modalCarrito = document.getElementsByClassName('modal-carrito')[0];
-let contenedorModal = document.getElementById('modalCarrito');
-let botonCerrarCarrito = $('#cerrarCarrito');
-let selectPrecios = document.getElementById('precios');    
-let botonPagar = document.getElementById('boton-pagar');
+    carrito = [],
+    cargarPagina = document.body,
+    botonOrdenar = document.getElementById('boton-ordenar'),
+    modalCarrito = document.getElementsByClassName('modal-carrito')[0],
+    contenedorModal = document.getElementById('modalCarrito'),
+    botonCerrarCarrito = $('#cerrarCarrito'),
+    selectPrecios = document.getElementById('precios'),    
+    botonPagar = document.getElementById('boton-pagar');
 
 // ---------------  Incorporacion al DOM ----------------------------
 const URLCATEGORIAS = 'https://api.mercadolibre.com/sites/MLA/categories';
@@ -36,32 +36,15 @@ document.addEventListener('DOMContentLoaded', function(){
 ManagerDom.filtrarCategoria('categorias', 'change', ManagerDom.seleccionCategoria);
 ManagerDom.buscarPalabra('busqueda', 'change', ManagerDom.traerBusqueda);
 ManagerDom.buscarPalabra('buscar', 'click', ManagerDom.traerBusqueda);
-
-function fetchProductos(url){
-  fetch(url)
-    .then(respuesta => {
-      console.log(respuesta);
-      return respuesta.json();
-    })
-    .then( articulos => {
-      productosEnPantalla = [];
-      ManagerDom.crearCard(articulos.results)})
-    .catch(e => console.log(e));
-}
-    
 ManagerDom.crearBanner();
 
 //--------------- Eventos ---------------------
 
-
 cargarPagina.onload = iniciarCarrito;
-
-// let botonCuotas = document.getElementById('boton-financiar');
-// botonCuotas.onclick = cuotas;
 
 botonOrdenar.onclick = ordenarCarrito;
 
-//let btnColor = document.getElementById('color');
+//let btnModoOscuro = document.getElementById('modoOscuro');
 //btnColor.onclick = bgChange;
 
 modalCarrito.addEventListener('click', (event)=>{
@@ -78,9 +61,7 @@ botonPagar.addEventListener('click', ()=>{
   vaciarCarrito();
 });
 
-
-// carrito modal
-
+//-------------------- Eventos - carrito modal ---------------
 
 $('#changuito').on('click', function (){
   $('#modalCarrito').addClass('modal-active');
@@ -91,20 +72,12 @@ botonCerrarCarrito.on('click', function (e){
   $('#modalCarrito').removeClass('modal-active');
 });
 
-
-
-
-// revisar
-
-
+// -------------------- Eventos - Filtro de productos por precios ---------------
 
 selectPrecios.addEventListener('change', ()=>{
   ManagerDom.filtrarPorPrecio()
 })
 
-
 document.getElementById("acumuladorCarrito").innerHTML = acumuladorIndicadorCarrito;
 document.getElementById("carrito").innerHTML = acumuladorItemsCarrito;
 document.getElementById("total").innerHTML = acumuladorTotal;
-// document.getElementById("cuotas").innerHTML = acumuladorCuotas;
-
