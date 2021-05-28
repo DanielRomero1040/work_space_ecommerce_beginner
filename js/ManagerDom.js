@@ -1,31 +1,35 @@
 let productosEnPantalla = [];
+let estaFiltrado = ``;
 
 class ManagerDom{
-  static crearCard(objeto){    
+  static crearCard(objeto){
+    productosEnPantalla = [];    
     document.getElementById('productos').innerHTML = ``;
       objeto.forEach( element => {
           const div = document.createElement('div');
-          div.classList.add('col-lg-3','col-md-4','mb-4')
+          div.classList.add('col-lg-3','col-md-4','mb-4', 'tarjeta')
           div.innerHTML = `
-            <div class="card h-100">
-              <a href="#"><img height="250" width="400" class="card-img-top" src=${element.thumbnail} alt=""></a>
+            <div class="card h-90">
+              <a href="#"><img height="200" width="410" class="card-img-top" src=${element.thumbnail} alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                <a href="#">${element.title}</a>
+                <a href="#" class="titulo">${element.title}</a>
                 </h4>
                 <h5> $${element.price}</h5>
               </div>
               <div class="card-footer d-flex flex-column">
                 <div clas="d-flex flex-row justify-content-center align-items-center">
-                  <small class="text-muted col-1">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                  <button class=" col-6 btn btn-primary ml-1 mb-1" onClick='agregarAlCarrito(${JSON.stringify(element)})'>Add Cart</button>
+                  <button class=" col-lg-6 btn btn-primary ml-1 mb-1" onClick='agregarAlCarrito(${JSON.stringify(element)})'>Add Cart</button>
                 </div>
                      
               </div>
             </div>
         `
-        productosEnPantalla.push(element);
-        console.log([productosEnPantalla])
+        if (estaFiltrado != `si`){
+          productosEnPantalla.push(element);
+          localStorage.setItem('productosEnPantalla', JSON.stringify(productosEnPantalla));
+          console.log('no ha sido filtrado')
+        }
         document.getElementById('productos').appendChild(div);
       });
   }
@@ -70,7 +74,7 @@ class ManagerDom{
   static actualizarCard(){
     let select  = document.getElementById('seccionProductos');
     let myInner = '';
-    data.forEach(element => { myInner += ManagerDom.crearCard(element) });
+    data.forEach(element => { myInner += this.crearCard(element) });
     select.innerHTML = myInner;
   }
 
@@ -85,7 +89,6 @@ class ManagerDom{
   static traerBusqueda = () => {
     let palabra = document.getElementById('busqueda').value;
     const URLBUSCADOR = `https://api.mercadolibre.com/sites/MLA/search?q=${encodeURI(palabra)}`;
-    console.log(URLBUSCADOR)
     fetchProductos(URLBUSCADOR);      
   }
 
@@ -94,18 +97,49 @@ class ManagerDom{
   }
 
   static filtrarPorPrecio() {
+    let cardsEnLocalStorage = JSON.parse(localStorage.getItem('productosEnPantalla'));
+    let cardsEnPantalla = cardsEnLocalStorage;  
     let valorFiltroPrecios = selectPrecios.value;
-  
     let arrayFiltrado = [];
+    estaFiltrado = `si`;
+  
     
     if (valorFiltroPrecios == 1) {
-      arrayFiltrado = productosEnPantalla.filter( el => el.price <= 5000)
+      arrayFiltrado = cardsEnPantalla.filter( el => el.price <= 5000)
     } else if (valorFiltroPrecios == 2) {
-      arrayFiltrado = productosEnPantalla.filter( el => el.price >= 5000)
+      arrayFiltrado = cardsEnPantalla.filter( el => el.price >= 5000)
     } else if (valorFiltroPrecios == 0) {
-      arrayFiltrado = productosEnPantalla;
+      arrayFiltrado = cardsEnPantalla;
     }
-    ManagerDom.crearCard(arrayFiltrado);
+    this.crearCard(arrayFiltrado);
     
   }
+
+  static filtrarPorPrecioDesdeHasta() {
+    let cardsEnLocalStorage = JSON.parse(localStorage.getItem('productosEnPantalla'));
+    let cardsEnPantalla = cardsEnLocalStorage;  
+    let valorInicial = document.getElementById('inicial').value;
+    let valorFinal = document.getElementById('final').value;  
+    let arrayPreFiltrado = [];
+    let arrayFiltrado = [];
+    estaFiltrado = `si`;
+
+    if ((valorInicial) && (valorFinal)){
+      arrayPreFiltrado = cardsEnPantalla.filter( el => el.price <= valorFinal);
+      arrayFiltrado = arrayPreFiltrado.filter( el => el.price >= valorInicial);
+    } 
+    else if((valorInicial != null) && (valorFinal)){
+      valorInicial = 0;
+      arrayPreFiltrado = cardsEnPantalla.filter( el => el.price <= valorFinal);
+      arrayFiltrado = arrayPreFiltrado.filter( el => el.price >= valorInicial);
+    } 
+    else if((valorInicial) && (valorFinal != null)){
+      valorFinal = 0;
+      arrayFiltrado = cardsEnPantalla.filter( el => el.price >= valorInicial);
+    }
+    else if((valorInicial != null) && (valorFinal != null)){
+      arrayFiltrado = cardsEnPantalla;
+    }
+    ManagerDom.crearCard(arrayFiltrado);       
+    }
 }

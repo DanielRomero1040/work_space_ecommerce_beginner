@@ -1,5 +1,7 @@
-let agregarAlCarrito = (producto) => {  
-  console.log(carrito)
+//-------------- Funcionalidades ------------------
+
+
+let agregarAlCarrito = (producto) => {
   if (carrito) {
     let itemEnCarrito = carrito.find(el => el.id == producto.id);
       if (itemEnCarrito) {
@@ -9,7 +11,6 @@ let agregarAlCarrito = (producto) => {
         carrito.push(producto);
       }
   } else {
-      console.log(producto)
       producto.cantidad = 1;   
       carrito.push(producto);
   }
@@ -86,7 +87,6 @@ let eliminarItem = (id) => {
   }
 
   localStorage.setItem('carrito' ,JSON.stringify(carrito));
-  console.log(carrito)
   actualizarCarrito()
   indicadorCarrito()  
 };
@@ -110,10 +110,10 @@ function fetchProductos(url){
   animacionCarga();
   fetch(url)
     .then(respuesta => {
-      console.log(respuesta);
       return respuesta.json();
     })
     .then( articulos => {
+      estaFiltrado = ``;
       productosEnPantalla = [];
       ManagerDom.crearCard(articulos.results)})
     .catch(e => console.log(e));
@@ -122,23 +122,13 @@ function fetchProductos(url){
 let animacionCarga = () => {
   contenedorDeProductos.innerHTML=``;
   const div = document.createElement('div');
-          div.classList.add('cont-animacion')
+          div.classList.add('cont-animacion', 'row', 'col-lg')
           div.innerHTML = `
           <div class="animacionCarga">
           </div> `
   contenedorDeProductos.appendChild(div);
 };
 
-// function random(number) {
-//   return Math.floor(Math.random() * (number+1));
-// };
-
-// function bgChange() {
-//   let fondoOscuro = 'rgb(' 39, 39, 43')';
-//   console.log(rndCol)
-//   localStorage.setItem('colorDeFondo', rndCol);
-//   document.body.style.backgroundColor = rndCol;
-// };
 
 // ----------- API MERCADO PAGO --------------
 

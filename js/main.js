@@ -16,13 +16,13 @@ let contenedorDeProductos = document.getElementById('productos'),
     botonPagar = document.getElementById('boton-pagar');
 
 // ---------------  Incorporacion al DOM ----------------------------
+
 const URLCATEGORIAS = 'https://api.mercadolibre.com/sites/MLA/categories';
 const URLPRODUCTOS = 'https://api.mercadolibre.com/sites/MLA/search?category=';
 
 document.addEventListener('DOMContentLoaded', function(){
   fetch(URLCATEGORIAS)
     .then(respuesta => {
-      console.log(respuesta);
       return respuesta.json();
     })
     .then( categorias => {
@@ -46,6 +46,8 @@ botonOrdenar.onclick = ordenarCarrito;
 
 //let btnModoOscuro = document.getElementById('modoOscuro');
 //btnColor.onclick = bgChange;
+
+document.getElementById('filtrar').addEventListener('click', ManagerDom.filtrarPorPrecioDesdeHasta)
 
 modalCarrito.addEventListener('click', (event)=>{
   event.stopPropagation()

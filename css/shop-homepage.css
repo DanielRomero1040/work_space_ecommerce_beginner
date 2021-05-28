@@ -29,6 +29,7 @@ ul #registroDeUsuarios li{
   opacity: 0;
   visibility: hidden;
   margin-left: 0;
+  z-index: 99;
 }
 
 .modal-active {
@@ -101,6 +102,7 @@ ul #registroDeUsuarios li{
   transition: all .5s;
   border-radius: 10px;
   margin-top: 300px;
+  z-index: 99;
 }
 
 .modal-active .modal-carrito {
@@ -130,11 +132,12 @@ ul #registroDeUsuarios li{
 }
 .modal-carrito  {
   padding-top: 10px;
+  height: 80vh;
   
 }
 #carrito{
   overflow: scroll;
-  height: 200px;
+  height: 60vh;
 }
 
 #boton-ordenar{
@@ -144,6 +147,17 @@ ul #registroDeUsuarios li{
 .banner{
   padding-left: 0;
   padding-right: 0;
+  width: 100vw;
+}
+
+#carrusel div img{
+  width: 100vw;
+}
+
+#productos{
+  padding-left: 0;
+  padding-right: 0;
+  width: 80vw;
 }
 
 .cont-animacion{
@@ -174,3 +188,11 @@ ul #registroDeUsuarios li{
 }
 
 
+.tarjeta .card:hover{
+  transform: scale(1.02);
+  box-shadow: 2px 2px 5px gray;
+}
+
+.titulo{
+  font-size: 1rem;
+}
