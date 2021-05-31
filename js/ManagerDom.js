@@ -2,7 +2,7 @@ let productosEnPantalla = [];
 let estaFiltrado = ``;
 
 class ManagerDom{
-  static crearCard(objeto){
+  crearCard(objeto){
     productosEnPantalla = [];    
     document.getElementById('productos').innerHTML = ``;
       objeto.forEach( element => {
@@ -27,14 +27,13 @@ class ManagerDom{
         `
         if (estaFiltrado != `si`){
           productosEnPantalla.push(element);
-          localStorage.setItem('productosEnPantalla', JSON.stringify(productosEnPantalla));
-          console.log('no ha sido filtrado')
+          localStorage.setItem('productosEnPantalla', JSON.stringify(productosEnPantalla));          
         }
         document.getElementById('productos').appendChild(div);
       });
   }
 
-  static crearCategorias(categorias){
+  crearCategorias(categorias){
     let select = document.getElementById('categorias');
     let options = ``;
       categorias.forEach( (element) => {options += `<option value="${element.id}">${element.name}</option>`
@@ -42,7 +41,7 @@ class ManagerDom{
     select.innerHTML = options;
   }
 
-  static crearBanner(){
+  crearBanner(){
       let banner = ['banner1','banner2','banner3'];
       let acumuladorBanners = ``;
       let acumuladorCarruselItem = ``;
@@ -71,32 +70,32 @@ class ManagerDom{
       document.getElementById("carrusel").innerHTML = acumuladorCarruselItem;
     }
 
-  static actualizarCard(){
+  actualizarCard(){
     let select  = document.getElementById('seccionProductos');
     let myInner = '';
     data.forEach(element => { myInner += this.crearCard(element) });
     select.innerHTML = myInner;
   }
 
-  static filtrarCategoria(id, event, handler){
+  filtrarCategoria(id, event, handler){
     document.getElementById(id).addEventListener(event, handler);
   }
-  static seleccionCategoria(){
+  seleccionCategoria(){
     let urlProductos = URLPRODUCTOS+ this.value;
     fetchProductos(urlProductos);
   }
 
-  static traerBusqueda = () => {
+  traerBusqueda = () => {
     let palabra = document.getElementById('busqueda').value;
     const URLBUSCADOR = `https://api.mercadolibre.com/sites/MLA/search?q=${encodeURI(palabra)}`;
     fetchProductos(URLBUSCADOR);      
   }
 
-  static buscarPalabra(id, event, handler){
+  buscarPalabra(id, event, handler){
     document.getElementById(id).addEventListener(event, handler);
   }
 
-  static filtrarPorPrecio() {
+  filtrarPorPrecio() {
     let cardsEnLocalStorage = JSON.parse(localStorage.getItem('productosEnPantalla'));
     let cardsEnPantalla = cardsEnLocalStorage;  
     let valorFiltroPrecios = selectPrecios.value;
@@ -115,7 +114,7 @@ class ManagerDom{
     
   }
 
-  static filtrarPorPrecioDesdeHasta() {
+  filtrarPorPrecioDesdeHasta() {
     let cardsEnLocalStorage = JSON.parse(localStorage.getItem('productosEnPantalla'));
     let cardsEnPantalla = cardsEnLocalStorage;  
     let valorInicial = document.getElementById('inicial').value;
@@ -140,6 +139,6 @@ class ManagerDom{
     else if((valorInicial != null) && (valorFinal != null)){
       arrayFiltrado = cardsEnPantalla;
     }
-    ManagerDom.crearCard(arrayFiltrado);       
+    managerDOM.crearCard(arrayFiltrado);       
     }
 }

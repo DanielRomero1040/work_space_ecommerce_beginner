@@ -46,17 +46,14 @@ let actualizarCarrito = () => {
 };
 
 let iniciarCarrito = () => {
-  //let rndCol = localStorage.getItem('colorDeFondo');
   carritoEnLocalStorage = JSON.parse(localStorage.getItem('carrito'));
   carrito = carritoEnLocalStorage;  
   if (carritoEnLocalStorage){           
-    actualizarCarrito();
-    //document.body.style.backgroundColor = rndCol;
+    actualizarCarrito();    
     indicadorCarrito();
   }else{
     localStorage.removeItem('carrito');
-    localStorage.removeItem('acumuladorIndicadorCarrito');
-    //localStorage.removeItem('colorDeFondo');
+    localStorage.removeItem('acumuladorIndicadorCarrito');    
     carritoEnLocalStorage = [];
     carrito = []; 
   }    
@@ -65,13 +62,12 @@ let iniciarCarrito = () => {
 let vaciarCarrito = () => {
   localStorage.removeItem('carrito');
   localStorage.removeItem('acumuladorIndicadorCarrito');
-  acumuladorItemsCarrito = ``;
-  acumuladorIndicadorCarrito = 0;
+  acumuladorItemsCarrito = ``;  
   acumuladorTotal = 0;
   carritoEnLocalStorage = [];
   carrito = [];
   document.getElementById("carrito").innerHTML = acumuladorItemsCarrito;
-  document.getElementById("acumuladorCarrito").innerHTML = acumuladorIndicadorCarrito;
+  document.getElementById("acumuladorCarrito").innerHTML = carrito.length;
   document.getElementById("total").innerHTML = acumuladorTotal;
 };
 
@@ -115,7 +111,7 @@ function fetchProductos(url){
     .then( articulos => {
       estaFiltrado = ``;
       productosEnPantalla = [];
-      ManagerDom.crearCard(articulos.results)})
+      managerDOM.crearCard(articulos.results)})
     .catch(e => console.log(e));
 }
 

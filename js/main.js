@@ -1,21 +1,22 @@
-let contenedorDeProductos = document.getElementById('productos'),  
-    acumuladorIndicadorCarrito = 0,
-    acumuladorItemsCarrito = ``,
-    acumuladorTotal = 0,
-    acumuladorCuotas = 0,
-    cantidadDeCuotas,
-    cuotaMensual,
-    carritoEnLocalStorage = [],
-    carrito = [],
-    cargarPagina = document.body,
-    botonOrdenar = document.getElementById('boton-ordenar'),
-    modalCarrito = document.getElementsByClassName('modal-carrito')[0],
-    contenedorModal = document.getElementById('modalCarrito'),
-    botonCerrarCarrito = $('#cerrarCarrito'),
-    selectPrecios = document.getElementById('precios'),    
-    botonPagar = document.getElementById('boton-pagar');
+let  contenedorDeProductos = document.getElementById('productos');  
+let  acumuladorIndicadorCarrito = 0;
+let  acumuladorItemsCarrito = ``;
+let  acumuladorTotal = 0;
+let  acumuladorCuotas = 0;
+let  carritoEnLocalStorage = [];
+let  carrito = [];
+let  cargarPagina = document.body;
+let  botonOrdenar = document.getElementById('boton-ordenar');
+let  modalCarrito = document.getElementsByClassName('modal-carrito')[0];
+let  contenedorModal = document.getElementById('modalCarrito');
+let  botonCerrarCarrito = $('#cerrarCarrito');
+let  selectPrecios = document.getElementById('precios');    
+let  botonPagar = document.getElementById('boton-pagar');
 
 // ---------------  Incorporacion al DOM ----------------------------
+
+
+const managerDOM = new ManagerDom();
 
 const URLCATEGORIAS = 'https://api.mercadolibre.com/sites/MLA/categories';
 const URLPRODUCTOS = 'https://api.mercadolibre.com/sites/MLA/search?category=';
@@ -28,15 +29,15 @@ document.addEventListener('DOMContentLoaded', function(){
     .then( categorias => {
       let urlProducto = URLPRODUCTOS + 'MLA5725'; 
       fetchProductos(urlProducto);
-      ManagerDom.crearCategorias(categorias)     
+      managerDOM.crearCategorias(categorias)     
     })
     .catch(e => console.log(e));
 })
 
-ManagerDom.filtrarCategoria('categorias', 'change', ManagerDom.seleccionCategoria);
-ManagerDom.buscarPalabra('busqueda', 'change', ManagerDom.traerBusqueda);
-ManagerDom.buscarPalabra('buscar', 'click', ManagerDom.traerBusqueda);
-ManagerDom.crearBanner();
+managerDOM.filtrarCategoria('categorias', 'change', managerDOM.seleccionCategoria);
+managerDOM.buscarPalabra('busqueda', 'change', managerDOM.traerBusqueda);
+managerDOM.buscarPalabra('buscar', 'click', managerDOM.traerBusqueda);
+managerDOM.crearBanner();
 
 //--------------- Eventos ---------------------
 
@@ -44,10 +45,7 @@ cargarPagina.onload = iniciarCarrito;
 
 botonOrdenar.onclick = ordenarCarrito;
 
-//let btnModoOscuro = document.getElementById('modoOscuro');
-//btnColor.onclick = bgChange;
-
-document.getElementById('filtrar').addEventListener('click', ManagerDom.filtrarPorPrecioDesdeHasta)
+document.getElementById('filtrar').addEventListener('click', managerDOM.filtrarPorPrecioDesdeHasta)
 
 modalCarrito.addEventListener('click', (event)=>{
   event.stopPropagation()
@@ -77,7 +75,7 @@ botonCerrarCarrito.on('click', function (e){
 // -------------------- Eventos - Filtro de productos por precios ---------------
 
 selectPrecios.addEventListener('change', ()=>{
-  ManagerDom.filtrarPorPrecio()
+  managerDOM.filtrarPorPrecio()
 })
 
 document.getElementById("acumuladorCarrito").innerHTML = acumuladorIndicadorCarrito;
