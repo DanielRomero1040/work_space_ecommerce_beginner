@@ -22,6 +22,8 @@ _A continuación parte de las herramientas y tecnologías utilizadas._
 </br>
 
 
+![IMI MELI](https://github.com/DanielRomero1040/work_space_ecommerce_beginner/blob/main/imagenes/Mockup%20Meli.png)
+
 
 ## Muchas gracias por tomarte el tiempo en revisar mi trabajo! 🎁
 
